@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로그레스바</title>
+    <style>
+      input {
+        display: block;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="range" id="range1" value="0" min="0" max="100" name="range" />
+      <div><span id="num1">0</span> %</div>
+      <input type="range" id="range2" value="0" min="0" max="100" name="range" />
+      <div><span id="num2">0</span> %</div>
+      <div class="all">0</div>
+    </div>
+
+    <script>
+      const range1 = document.getElementById('range1');
+      const range2 = document.getElementById('range2');
+      const num1 = document.getElementById('num1');
+      const num2 = document.getElementById('num2');
+      const all = document.getElementById('all');
+      let sum = 0;
+
+      range1.addEventListener('input', (event) => {
+        let target = event.target;
+        const { value, min, max } = target;
+
+        if (+value + +range2.value > 100) {
+          range2.value = +max - +range1.value;
+        }
+
+        num1.textContent = range1.value;
+        num2.textContent = range2.value;
+      });
+
+      range2.addEventListener('input', (event) => {
+        let target = event.target;
+        const { value, min, max } = target;
+
+        if (+value + +range1.value > 100) {
+          range1.value = +max - +range2.value;
+        }
+
+        num1.textContent = range1.value;
+        num2.textContent = range2.value;
+      });
+    </script>
+  </body>
+</html>
